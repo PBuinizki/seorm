@@ -5,5 +5,6 @@ export default defineNuxtConfig({
     // Переменные, доступные только на сервере
     sqliteFile: process.env.SQLITE_FILE || './data.db',
   },
+  css: ['~/assets/scss/main.scss'],
   // Если нужен автоимпорт composables из папки composables – он уже работает по умолчанию
 })

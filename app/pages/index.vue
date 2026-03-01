@@ -27,50 +27,64 @@ const totalTime = computed(() => {
 </script>
 <!-- pages/index.vue -->
 <template>
-  <div>
+  <!-- Добавил класс task-manager -->
+  <div class="task-manager">
     <h1>Типовые задачи</h1>
 
     <!-- Форма добавления -->
-    <form @submit.prevent="handleCreate">
+    <form @submit.prevent="handleCreate" class="task-form">
       <h3>Добавить задачу</h3>
-      <div>
+      <div class="form-group">
         <label>Название:</label>
-        <input v-model="newTask.task_name" required />
+        <input v-model="newTask.task_name" required placeholder="Например: Созвон с клиентом" />
       </div>
-      <div>
+      <div class="form-group">
         <label>Категория:</label>
-        <input v-model="newTask.category" required />
+        <input v-model="newTask.category" required placeholder="Например: Работа" />
       </div>
-      <div>
+      <div class="form-group">
         <label>Время (мин):</label>
-        <input v-model.number="newTask.time_estimate" type="number" required />
+        <input v-model.number="newTask.time_estimate" type="number" required min="1" />
       </div>
-      <button type="submit" :disabled="isLoading">Добавить</button>
-      <p v-if="error" style="color: red">{{ error }}</p>
+
+      <button type="submit" :disabled="isLoading" class="btn-primary">
+        {{ isLoading ? 'Добавляю...' : 'Добавить' }}
+      </button>
+
+      <p v-if="error" class="error-message">{{ error }}</p>
     </form>
 
-    <hr />
+    <hr class="divider" />
 
-    <div v-if="isLoading">Загрузка...</div>
-    <div v-else-if="error">Ошибка: {{ error }}</div>
-    <ul v-else>
-      <li v-for="task in tasks" :key="task.id">
-        {{ task.task_name }} ({{ task.category }}, {{ task.time_estimate }} мин.)
+    <div v-if="isLoading" class="loading-state">Загрузка данных...</div>
+    <div v-else-if="error" class="error-message">Ошибка: {{ error }}</div>
+
+    <ul v-else class="task-list">
+      <li v-for="task in tasks" :key="task.id" class="task-item">
+        <span class="task-name">{{ task.task_name }}</span>
+        <span class="task-meta">
+          <span class="badge">{{ task.category }}</span>
+          <span class="time">{{ task.time_estimate }} мин.</span>
+        </span>
       </li>
     </ul>
 
-    <h2>Отчёт</h2>
-    <table border="1" cellpadding="5">
-      <tbody>
-        <tr>
-          <td>Всего задач:</td>
-          <td>{{ tasks.length }}</td>
-        </tr>
-        <tr>
-          <td>Общая оценка времени:</td>
-          <td>{{ totalTime }} мин.</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="report-section">
+      <h2>Отчёт</h2>
+      <table class="report-table">
+        <tbody>
+          <tr>
+            <td>Всего задач:</td>
+            <td>{{ tasks.length }}</td>
+          </tr>
+          <tr>
+            <td>Общая оценка времени:</td>
+            <td class="highlight">{{ totalTime }} мин.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
+
+<style src="~/assets/scss/pages/index.scss"></style>
