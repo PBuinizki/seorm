@@ -29,6 +29,6 @@ export const useTypicalTasks = () => {
     tasks,
     isLoading,
     error,
-    refresh: fetchTasks
+    refresh: fetchTasks,
   }
 }

@@ -1,10 +1,10 @@
 <script setup>
- import { useTypicalTasks } from '~/composables/useTypicalTasks';
-    const { tasks, isLoading, error } = useTypicalTasks()
-    
-    const totalTime = computed(() => {
-      return tasks.value.reduce((acc, task) => acc + task.time_estimate, 0)
-    })
+import { useTypicalTasks } from '~/composables/useTypicalTasks'
+const { tasks, isLoading, error } = useTypicalTasks()
+
+const totalTime = computed(() => {
+  return tasks.value.reduce((acc, task) => acc + task.time_estimate, 0)
+})
 </script>
 <!-- pages/index.vue -->
 <template>
@@ -20,15 +20,16 @@
 
     <h2>Отчёт</h2>
     <table border="1" cellpadding="5">
-        <tbody>
-      <tr>
-        <td>Всего задач:</td>
-        <td>{{ tasks.length }}</td>
-      </tr>
-      <tr>
-        <td>Общая оценка времени:</td>
-        <td>{{ totalTime }} мин.</td>
-      </tr></tbody>
+      <tbody>
+        <tr>
+          <td>Всего задач:</td>
+          <td>{{ tasks.length }}</td>
+        </tr>
+        <tr>
+          <td>Общая оценка времени:</td>
+          <td>{{ totalTime }} мин.</td>
+        </tr>
+      </tbody>
     </table>
   </div>
 </template>

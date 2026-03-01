@@ -7,11 +7,11 @@ export const useTypicalTasksStore = defineStore('typicalTasks', {
       task_name: string
       category: string
       time_estimate: number
-    }>
+    }>,
   }),
   actions: {
     setTasks(tasks) {
       this.tasks = tasks
-    }
-  }
+    },
+  },
 })
